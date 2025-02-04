@@ -1,0 +1,25 @@
+{
+  "name": "roi-calculator",
+  "version": "0.1.0",
+  "description": "AI ROI Calculator for measuring project effectiveness",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "log": "ts-node scripts/log-cli.ts",
+    "log:example": "ts-node scripts/examples/log-example.ts"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "commander": "^9.5.0"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.2",
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2"
+  }
+} 
