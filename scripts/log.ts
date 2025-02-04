@@ -1,53 +1,24 @@
 import * as fs from 'fs';
-import * as path from 'path';
 
-interface LogEntry {
-  title: string;
-  items: string[];
-  timestamp: Date;
+function addLogEntry(title: string, items: string[]): void {
+  const now = new Date();
+  const date = now.toISOString().split('T')[0];
+  const time = now.toTimeString().split(' ')[0];
+  
+  let entry = `\n## ${date}\n\n`;
+  entry += `### ${time} - ${title}\n\n`;
+  items.forEach(item => {
+    entry += `- ${item}\n`;
+  });
+  entry += '\n';
+
+  fs.appendFileSync('docs/log.md', entry);
 }
 
-class DevLogger {
-  private logFile: string;
-
-  constructor(logFile: string = 'docs/log.md') {
-    this.logFile = logFile;
-    this.ensureLogFile();
-  }
-
-  private ensureLogFile(): void {
-    if (!fs.existsSync(this.logFile)) {
-      fs.writeFileSync(this.logFile, '# Development Log\n\n');
-    }
-  }
-
-  public addEntry(title: string, items: string[]): void {
-    const now = new Date();
-    const entry: LogEntry = {
-      title,
-      items,
-      timestamp: now
-    };
-
-    const entryText = this.formatEntry(entry);
-    const currentContent = fs.readFileSync(this.logFile, 'utf8');
-    fs.writeFileSync(this.logFile, currentContent + entryText);
-  }
-
-  private formatEntry(entry: LogEntry): string {
-    const date = entry.timestamp.toISOString().split('T')[0];
-    const time = entry.timestamp.toTimeString().split(' ')[0];
-    
-    let text = `\n## ${date}\n\n`;
-    text += `### ${time} - ${entry.title}\n\n`;
-    
-    entry.items.forEach(item => {
-      text += `- ${item}\n`;
-    });
-    
-    text += '\n';
-    return text;
-  }
+const [,, title, ...items] = process.argv;
+if (!title) {
+  console.error('Usage: npm run log "Title" "Item 1" "Item 2" ...');
+  process.exit(1);
 }
 
-export const logger = new DevLogger(); 
+addLogEntry(title, items); 

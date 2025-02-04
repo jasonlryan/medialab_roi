@@ -1,0 +1,19 @@
+{
+  "projectName": "AI Chat Assistant",
+  "startDate": "2024-02-04",
+  "annualHoursSaved": 2000,
+  "hourlyRate": 75,
+  "annualImplementationCost": 50000,
+  "intangibleMetrics": {
+    "confidenceIndex": 0.8,
+    "skillIndex": 0.7,
+    "progressionIndex": 0.6,
+    "clientSatisfactionIndex": 0.9
+  },
+  "weights": {
+    "confidenceWeight": 0.3,
+    "skillWeight": 0.2,
+    "progressionWeight": 0.2,
+    "clientSatisfactionWeight": 0.3
+  }
+} 
